@@ -1,3 +1,4 @@
+test
 #!/bin/bash
 
 for path in /var/www/Aufnahmen/aufnahme_fertig*.mp3
