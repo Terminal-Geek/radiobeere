@@ -50,11 +50,30 @@
         $sender = "$row->name";
         }
 
-if ($datum !="")
+	if ($datum !="")
         {
         $wochentage ="*";
+	$tag = (substr($datum,0,2));
+	$monat = (substr($datum,3,2));
+	}
+	else
+	{
+	$tag = "*";
+	$monat = "*";
+        $klarnamen = array("Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag");
+        $i = "0";
+        while($i < 7)
+        {
+        $a = (string) "$i";
+        $pos = strpos($wochentage, $a);
+        if ($pos !== false) 
+        {
+        $klartext .= "$klarnamen[$i], ";
         }
-
+        $i++;
+        }
+        $wtage = substr_replace($klartext, '', -2, 2);
+	}
 ?>
 
 
@@ -64,18 +83,22 @@ if ($datum !="")
         <div role="main" class="ui-content">
         <h2>Aufnahme planen</h2>
 
-
+	<p>Du hast folgende Aufnahme geplant:</p>
 <?php
 
-        echo "Sender: $sender<br>";
-        echo "Sekunden: $sekunden<br>";
-        echo "Datum: $datum<br>";
-        echo "Wochentage: $wochentage<br>";
-
+        echo "Sender: <b>$sender</b><br><br>";
+        if ($datum != "")
+	{
+	echo "Datum: <b>$datum</b><br>";
+	}
+        echo "Uhrzeit: <b>$stunde:$minute Uhr</b><br>";
+        echo "Dauer: <b>$dauer Minuten</b><br>";
+	if ($wtage != "")
+	{
+        echo "Wochentage: <b>$wtage</b>";
+	}
 
 ?>
-
-
 
         <div align="center" class="illu-contentbereich">
         <center><img src="/img/timer_256.png" alt="Aufnahmen planen">
