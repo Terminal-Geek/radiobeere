@@ -1,0 +1,42 @@
+#!/bin/bash
+
+for path in /var/www/Aufnahmen/aufnahme_fertig*.mp3
+do
+        file="${path##*/}"
+	shortened1="${file#aufnahme_fertig_*}"
+        shortened2="${shortened1#*_}"
+	stationstring="${shortened1%%_*}"
+	year="${shortened2:0:4}"
+	month="${shortened2:5:2}"
+	day="${shortened2:8:2}"
+	hour="${shortened2:11:2}"
+	minute="${shortened2:14:2}"
+
+# Mapping stationstring to radiostations' full name
+
+case $stationstring in
+	kiraka)		station="KiRaKa"
+	;;
+	einslive)	station="Einslive"
+	;;
+	wdr2)		station="WDR 2"
+	;;
+	wdr3)		station="WDR 3"
+	;;
+	wdr4)		station="WDR 4"
+	;;
+	wdr5)		station="WDR 5"
+	;;
+	fhe)		station="Funkhaus Europa"
+	;;
+esac
+
+# Write ID3 tags
+
+id3v2 -a "$station" -A "$station" -t "$station, $day.$month.$year, $hour:$minute Uhr" -y "$year" "$path"
+
+# Rename file
+
+mv $path /var/www/Aufnahmen/""$stationstring"_"$year"-"$month"-"$day"_"$hour"-"$minute".mp3"
+
+done

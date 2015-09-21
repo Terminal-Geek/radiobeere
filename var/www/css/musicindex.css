@@ -1,0 +1,15 @@
+body {
+  font: 17pt "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+  color: black;
+  background-color: white;
+  max-width:900px;
+  margin: 10px auto;
+  padding: 20px;
+  border:1px solid grey;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+}
+
