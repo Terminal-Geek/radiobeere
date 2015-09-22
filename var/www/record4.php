@@ -76,7 +76,12 @@
 	}
 ?>
 
+<!--- Werte in die Datenbank schreiben --->
 
+        <?php
+        $eintrag = "INSERT INTO timer (sender, alias, stunde, minute, wochentage, dauer, tag, monat) VALUES ('$sender', '$alias', '$stunde', '$minute', '$wochentage', '$sekunden', '$tag', '$monat')";
+        $eintragen = mysql_query($eintrag);
+        ?>
 
 <!--- Seiteninhalt --->
 
