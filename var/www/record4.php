@@ -50,6 +50,13 @@
         $sender = "$row->name";
         }
 
+        $abfrage = "SELECT url FROM sender WHERE alias = '$alias'";
+        $ergebnis = mysql_query($abfrage);
+        while($row = mysql_fetch_object($ergebnis))
+        {
+        $url = "$row->url";
+        }
+
 	if ($datum !="")
         {
         $wochentage ="*";
@@ -66,7 +73,7 @@
         {
         $a = (string) "$i";
         $pos = strpos($wochentage, $a);
-        if ($pos !== false) 
+        if ($pos !== false)
         {
         $klartext .= "$klarnamen[$i], ";
         }
@@ -76,12 +83,13 @@
 	}
 ?>
 
-<!--- Werte in die Datenbank schreiben --->
+<!--- Timer in Datenbank und /etc/crontab schreiben --->
 
         <?php
         $eintrag = "INSERT INTO timer (sender, alias, stunde, minute, wochentage, dauer, tag, monat) VALUES ('$sender', '$alias', '$stunde', '$minute', '$wochentage', '$sekunden', '$tag', '$monat')";
         $eintragen = mysql_query($eintrag);
-        ?>
+	exec("sudo /home/pi/radiobeere/rb-cron-add.py");
+	?>
 
 <!--- Seiteninhalt --->
 
@@ -104,6 +112,14 @@
 	}
 
 ?>
+
+	<p>Alles korrekt?</p>
+        <form action="index.php" method="post">
+        <button type="submit" name="start" id="start">Ja, zur Startseite</button>
+	</form>
+        <form action="record.php" method="post">
+        <button type="submit" name="reset" id="reset" value="1">Nein, nochmal von vorne</button>
+        </form>
 
         <div align="center" class="illu-contentbereich">
         <center><img src="/img/timer_256.png" alt="Aufnahmen planen">

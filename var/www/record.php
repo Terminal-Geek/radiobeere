@@ -18,6 +18,29 @@
 	include("include/db-connect.php");
 	?>
 
+<!--- Variablen abrufen --->
+
+        <?php
+        $reset = $_POST["reset"];
+	?>
+
+<!--- Letzten Timer löschen --->
+
+	<?php
+        if ($reset == "1")
+        {
+	$abfrage = "SELECT id FROM timer ORDER BY id DESC LIMIT 1";
+	$ergebnis = mysql_query($abfrage);
+	while($row = mysql_fetch_object($ergebnis))
+   	{
+	$id =("$row->id");
+   	}
+	$loeschen = "DELETE FROM timer WHERE id = '$id'";
+	$loesch = mysql_query($loeschen);
+	$reset = "0";
+	}
+	?>
+
 <div data-role="page" class="ui-responsive-panel" id="panel" data-title="RadioBeere">
 
         <div data-role="header">
