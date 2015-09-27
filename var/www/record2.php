@@ -92,38 +92,20 @@
 
 <!--- Navigation --->
 
-        <div data-role="panel" data-display="push" data-theme="a" id="nav-panel">
-                <ul data-role="listview">
-                <li data-icon="delete"><a href="#" data-rel="close">Men&uuml; schlie&szlig;en</a></li>
-                <li><a href="record.php">Aufnahme planen</a></li>
-                <li><a href="timer.php">Timer verwalten</a></li>
-                <li><a href="player.php">Player</a></li>
-                <li><a href="podcast.php">Podcast</a></li>
-                <li><a href="stations.php">Sender verwalten</a></li>
-                <li><a href="dlna.php">Streaming Server</a></li>
-                <li><a href="samba.php">Dateien verwalten</a></li>
-                <li><a href="help.php">Hilfe</a></li>
-                </ul>
-        </div>
+        <?php
+        include("include/navigation.php");
+        ?>
 
 </div>
 
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <?php
+        include("include/jquery.php");
+        ?>
+
         <script src="/js/pickadate.js-3.5.6/lib/picker.js"></script>
         <script src="/js/pickadate.js-3.5.6/lib/legacy.js"></script>
         <script src="/js/pickadate.js-3.5.6/lib/picker.date.js"></script>
         <script src="/js/pickadate.js-3.5.6/lib/translations/de_DE.js"></script>
-
-                <script type='text/javascript'>
-                <!--
-                $(document).bind('mobileinit',function(){
-                $.extend(  $.mobile , {
-                defaultPageTransition: "none"
-                });
-                });
-                //-->
-                </script>
 
                 <script type='text/javascript'>
                 $(function() {
