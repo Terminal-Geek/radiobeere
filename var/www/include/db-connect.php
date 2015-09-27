@@ -1,4 +1,4 @@
 <?php
-$verbindung = mysql_connect("localhost","pi","password");
+$verbindung = mysql_connect("localhost","pi","test");
 mysql_select_db("radiobeere");
 ?>
