@@ -5,6 +5,7 @@ import MySQLdb
 from glob import glob
 import os
 import login
+import time
 
 def main():
 
@@ -25,12 +26,13 @@ def main():
             sender = "%s" % row
         datum = jahr+"."+monat+"."+tag 
         uhrzeit = stunde+":"+minute
+        zeitstempel = time.mktime((int(jahr), int(monat), int(tag), int(stunde), int(minute), 0, 0, 0, -1))
         datei = alias+'_'+jahr+'-'+monat+'-'+tag+'_'+stunde+'-'+minute+'.mp3'
 
         os.system('id3v2 -t'+'"'+sender+', '+tag+'.'+monat+'.'+jahr+', '+stunde+':'+minute+' Uhr'+'"'+' '+pfad)
         os.rename(pfad,verz+'/'+alias+'_'+jahr+'-'+monat+'-'+tag+'_'+stunde+'-'+minute+'.mp3')
 
-        cursor.execute("INSERT INTO aufnahmen(datum, uhrzeit, sender, datei) VALUES (%s,%s,%s,%s)",(datum, uhrzeit, sender, datei,))
+        cursor.execute("INSERT INTO aufnahmen(datum, uhrzeit, sender, datei, zeitstempel) VALUES (%s,%s,%s,%s,%s)",(datum, uhrzeit, sender, datei, zeitstempel,))
         connection.commit()
 
     connection.close()

@@ -1,4 +1,4 @@
-    @media only screen and (min-width: 1280px){
+@media only screen and (min-width: 1280px){
         .ui-page {
             width: 960px !important;
             margin: 0 auto !important;
@@ -8,31 +8,12 @@
         }
     }
 
-.content-container-left {
-	max-width:430px;
-	float: left;
-	padding: 10px;
-	margin: 0 auto;	
-}
-.content-container-right {
-        max-width:430px;
-        float: right;
-        padding: 10px;
-}
-
-.content-container-center {
+.ui-content {
         max-width:600px;
         clear: both;
         padding: 10px;
 	margin: 0 auto;
 }
-
-.illu-contentbereich {
-	width: 100%;
-	clear: both !important;
-	margin: 0 auto !important;
-	padding: 10px;
-	}
 
 h2 	{
 	text-align:center;

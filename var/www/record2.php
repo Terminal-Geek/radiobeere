@@ -6,8 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 
-        <link rel="stylesheet" href="/css/radiobeere.css">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<?php
+	include("include/styling.php");
+	?>
+
 	<link rel="stylesheet" href="/js/pickadate.js-3.5.6/lib/themes/default.css" id="theme_base">
 	<link rel="stylesheet" href="/js/pickadate.js-3.5.6/lib/themes/default.date.css" id="theme_date">
 </head>

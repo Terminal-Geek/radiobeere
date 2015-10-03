@@ -6,8 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
 
-        <link rel="stylesheet" href="/css/radiobeere.css" />
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<?php
+	include("include/styling.php");
+	?>
 </head>
 
 <body>
@@ -62,11 +63,14 @@
         $wochentage ="*";
 	$tag = (substr($datum,0,2));
 	$monat = (substr($datum,3,2));
+	$jahr = (substr($datum,6,4));
+	$zeitstempel = (mktime($stunde,$minute,0,$monat,$tag,$jahr));
 	}
 	else
 	{
 	$tag = "*";
 	$monat = "*";
+	$zeitstempel = "";
         $klarnamen = array("Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag");
         $i = "0";
         while($i < 7)
@@ -86,7 +90,7 @@
 <!--- Timer in Datenbank und /etc/crontab schreiben --->
 
         <?php
-        $eintrag = "INSERT INTO timer (sender, alias, stunde, minute, wochentage, dauer, tag, monat) VALUES ('$sender', '$alias', '$stunde', '$minute', '$wochentage', '$sekunden', '$tag', '$monat')";
+        $eintrag = "INSERT INTO timer (sender, alias, stunde, minute, wochentage, dauer, tag, monat,zeitstempel) VALUES ('$sender', '$alias', '$stunde', '$minute', '$wochentage', '$sekunden', '$tag', '$monat', '$zeitstempel')";
         $eintragen = mysql_query($eintrag);
 	exec("sudo /home/pi/radiobeere/rb-cron-add.py");
 	?>

@@ -4,9 +4,11 @@
 	<title>RadioBeere</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf8">
 
-        <link rel="stylesheet" href="/css/radiobeere.css" />
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<?php
+	include("include/styling.php");
+	?>
 </head>
 
 <body>
@@ -18,12 +20,12 @@
 		<h1>RadioBeere</h1>
 	</div>
 
-	<div role="main" class="ui-content">
+	<div role="main" class="ui-content" style="max-width:100% !important; text-align:center;">
         	<a href="record.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/timer_256.png" alt="Aufnahme planen" title="Aufnahme planen"><br>Aufnahmen planen</a>
-                <a href="manage_timer.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/manage_timer_256.png" alt="Timer verwalten" title="Timer verwalten"><br>Timer verwalten</a>
-                <a href="player.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/player_256.png" alt="Player" title="Player"><br>Player</a>
+                <a href="timer.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/manage_timer_256.png" alt="Timer verwalten" title="Timer verwalten"><br>Timer verwalten</a>
+                <a href="aufnahmen.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/player_256.png" alt="Player" title="Player"><br>Player</a>
                 <a href="podcast.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/podcast_256.png" alt="Podcast" title="Podcast"><br>Podcast</a>
-                <a href="manage_stations.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/sender_256.png" alt="Sender verwalten" title="Sender verwalten"><br>Sender verwalten</a>
+                <a href="stations.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/stations_256.png" alt="Sender verwalten" title="Sender verwalten"><br>Sender verwalten</a>
 	</div>
 
         <?php
