@@ -30,6 +30,8 @@
         include("include/db-connect.php")
 ?>
 
+<!--- Einträge in der DB und Files im Dateisystem loeschen --->
+
 <?php
         if ($_POST['del'])
                 {
@@ -47,10 +49,27 @@
         	}
 ?>
 
+<!--- Variablen für Pagination setzen --->
+
+<?php
+	$seite = $_GET["seite"];
+	if(!isset($seite))
+	{
+	$seite = 1;
+	}
+	$eintraege_pro_seite = 5;
+	$start = $seite * $eintraege_pro_seite - $eintraege_pro_seite;
+        $abfrage = mysql_query("SELECT id FROM aufnahmen");
+        $menge = mysql_num_rows($abfrage);
+        $wieviel_seiten = $menge / $eintraege_pro_seite;
+?>
+
+<!--- Datenausgabe --->
+
         <form method="POST">
 
 <?php
-        $abfrage = "SELECT * FROM aufnahmen ORDER BY zeitstempel";
+        $abfrage = "SELECT * FROM aufnahmen ORDER BY zeitstempel DESC LIMIT $start, $eintraege_pro_seite";
         $ergebnis = mysql_query($abfrage);
 
         while($row = mysql_fetch_object($ergebnis))
@@ -64,8 +83,29 @@
         echo "<button data-icon=\"delete\" data-iconpos=\"left\" data-inline=\"true\" name=\"del[]\" value=\"$row->id\" id=\"$row->id\">L&ouml;schen</button>";
 	echo "<br><br>";
         }
+
+        echo "<input type=\"hidden\" name=\"seite\" value=\"$seite\">";
+
 ?>
 	</form>
+
+<!--- Pagination --->
+
+<?php
+	echo "<b>Seite:</b>&nbsp;&nbsp;";
+	for($a=0; $a < $wieviel_seiten; $a++)
+		{
+		$b = $a + 1;
+		if($seite == $b)
+			{
+      			echo "&nbsp;&nbsp;<button class=\"ui-btn ui-btn-inline\">$b</button>";
+			}
+		else
+			{
+			echo "<a href=\"?seite=$b\" class=\"ui-btn ui-btn-inline ui-mini\"><b><u>$b</u></b></a>";
+			}
+		}
+?>
 
         <div class="illu-contentbereich">
         <center><img src="/img/player_256.png" alt=""></center>
