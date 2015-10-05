@@ -140,7 +140,8 @@
         $tag = (substr($row->datum,8,2));
         $monat = (substr($row->datum,5,2));
         $jahr = (substr($row->datum,0,4));
-	echo "<b>$row->sender, $tag.$monat.$jahr, $row->uhrzeit Uhr</b><br>";
+	$uhrzeit = (substr($row->uhrzeit,0,5));
+	echo "<b>$row->sender - $tag.$monat.$jahr - $uhrzeit Uhr ($row->laenge)</b><br>";
 	echo "<button data-icon=\"audio\" data-iconpos=\"left\" data-inline=\"true\">Play</button>";
         echo "<a href=\"/Aufnahmen/$row->datei\" target=\"_blank\" class=\"ui-btn ui-icon-arrow-d ui-btn-icon-left ui-btn-inline ui-corner-all ui-shadow\">Download</a>";
         echo "<button data-icon=\"delete\" data-iconpos=\"left\" data-inline=\"true\" name=\"del[]\" value=\"$row->id\" id=\"$row->id\">L&ouml;schen</button>";
