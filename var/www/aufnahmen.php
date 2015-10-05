@@ -21,6 +21,14 @@
                 <a href="/" data-icon="home" data-iconpos="notext">Startseite</a>
         </div>
 
+<?php
+        $filter_sender = $_POST["filter_sender"];
+        if(!isset($filter_sender))
+        {
+        $filter_sender = "alle";
+        }
+?>
+
 <!--- Seiteninhalt --->
 
         <div role="main" class="ui-content">
@@ -29,6 +37,33 @@
 <?php
         include("include/db-connect.php")
 ?>
+
+<!--- Filtern nach Sender --->
+
+        <div class="ui-field-contain">
+        <form method="post">
+        <select name="filter_sender" onchange="if(this.value != 0) { this.form.submit(); }">
+	<option value="alle">Alle Sender</option>
+<?php
+        $abfrage = "SELECT name FROM sender";
+        $ergebnis = mysql_query($abfrage);
+
+        while($row = mysql_fetch_object($ergebnis))
+        {
+	if ($row->name == $filter_sender)
+		{
+                echo "<option value=\"$row->name\" selected>$row->name</option><br>";
+		}
+	else
+		{
+		echo "<option value=\"$row->name\">$row->name</option><br>";
+		}
+        }
+        ?>
+
+        </select>
+        </form>
+        </div>
 
 <!--- Einträge in der DB und Files im Dateisystem loeschen --->
 
@@ -52,24 +87,52 @@
 <!--- Variablen für Pagination setzen --->
 
 <?php
-	$seite = $_GET["seite"];
+	$seite = $_POST["seite"];
 	if(!isset($seite))
 	{
 	$seite = 1;
 	}
 	$eintraege_pro_seite = 5;
 	$start = $seite * $eintraege_pro_seite - $eintraege_pro_seite;
-        $abfrage = mysql_query("SELECT id FROM aufnahmen");
+	if($filter_sender == "alle")
+		{
+	        $abfrage = mysql_query("SELECT id FROM aufnahmen");
+		}
+	else
+                {
+                $abfrage = mysql_query("SELECT id FROM aufnahmen WHERE sender = '$filter_sender'");
+                }
         $menge = mysql_num_rows($abfrage);
         $wieviel_seiten = $menge / $eintraege_pro_seite;
 ?>
 
 <!--- Datenausgabe --->
 
-        <form method="POST">
+        <form method="post">
 
 <?php
-        $abfrage = "SELECT * FROM aufnahmen ORDER BY zeitstempel DESC LIMIT $start, $eintraege_pro_seite";
+	if($menge > 1)
+		{
+		echo "<h3>$menge aufgenommene Sendungen</h3><br>";
+		}
+        if($menge == 1)
+                {
+                echo "<h3>$menge aufgenommene Sendung</h3><br>";
+                }
+        if($menge < 1)
+                {
+                echo "<h3>keine aufgenommenen Sendungen</h3><br>";
+                }
+
+
+        if($filter_sender == "alle")
+		{
+        	$abfrage = "SELECT * FROM aufnahmen ORDER BY zeitstempel DESC LIMIT $start, $eintraege_pro_seite";
+		}
+	else
+		{
+                $abfrage = "SELECT * FROM aufnahmen WHERE sender = '$filter_sender' ORDER BY zeitstempel DESC LIMIT $start, $eintraege_pro_seite";
+		}
         $ergebnis = mysql_query($abfrage);
 
         while($row = mysql_fetch_object($ergebnis))
@@ -85,26 +148,35 @@
         }
 
         echo "<input type=\"hidden\" name=\"seite\" value=\"$seite\">";
+        echo "<input type=\"hidden\" name=\"filter_sender\" value=\"$filter_sender\">";
 
 ?>
+
 	</form>
 
 <!--- Pagination --->
 
 <?php
+        if($menge >= 1)
+	{
+	echo "<form method=\"post\">";
+
+        echo "<input type=\"hidden\" name=\"filter_sender\" value=\"$filter_sender\">";
 	echo "<b>Seite:</b>&nbsp;&nbsp;";
 	for($a=0; $a < $wieviel_seiten; $a++)
 		{
 		$b = $a + 1;
 		if($seite == $b)
 			{
-      			echo "&nbsp;&nbsp;<button class=\"ui-btn ui-btn-inline\">$b</button>";
+                              echo "&nbsp;&nbsp;<input type=\"submit\" name=\"seite\" value=\"$b\" data-inline=\"true\">";
 			}
 		else
 			{
-			echo "<a href=\"?seite=$b\" class=\"ui-btn ui-btn-inline ui-mini\"><b><u>$b</u></b></a>";
+                              echo "&nbsp;<input type=\"submit\" name=\"seite\" value=\"$b\" data-inline=\"true\" data-mini=\"true\">";
 			}
 		}
+	echo "</form>";
+	}
 ?>
 
         <div class="illu-contentbereich">
@@ -112,6 +184,7 @@
         </div>
 
 	</div>
+
 
 <!--- Navigation --->
 
