@@ -84,6 +84,10 @@
         $i++;
         }
         $wtage = substr_replace($klartext, '', -2, 2);
+	if ($wtage == "Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag")
+		{
+		$wtage = "Täglich";
+		}
 	}
 ?>
 
