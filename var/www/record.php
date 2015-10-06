@@ -40,6 +40,7 @@
 	$loesch = mysql_query($loeschen);
 	$reset = "0";
 	}
+	exec("sudo /home/pi/radiobeere/rb-timer-update.py");
 	?>
 
 <div data-role="page" class="ui-responsive-panel" id="panel" data-title="RadioBeere">
