@@ -47,6 +47,7 @@
                 	$loesch = mysql_query($loeschen);
 			}
 		unset($del);
+		exec("sudo /home/pi/radiobeere/rb-timer-update.py");
 		echo "<b><font color=\"#f00\">Sender gel&ouml;scht!</font></b><br><br>";
 		echo "<script type=\"text/javascript\">setTimeout(function(){location.reload(true);}, 3000);</script>";
         	}
