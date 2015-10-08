@@ -108,9 +108,9 @@
 	</div>
 
 	<br>
-	<p>Dauer der Aufnahme (in Minuten):</p>
 
-	<input type="text" name="dauer">
+	<label for="slider-dauer"><p>Dauer der Aufnahme (in Minuten):</p></label>
+	<input type="range" name="dauer" id="slider-dauer" value="0" min="0" max="240" step="5" />
 
 	<br><br><button type="submit" name="submit">Programmierung abschlie&szlig;en</button>
 	</form>
