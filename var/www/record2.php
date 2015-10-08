@@ -32,7 +32,7 @@
 
 <!--- Seiteninhalt --->
 
-        <div role="main" class="ui-content">
+        <div data-main-role="main" class="ui-content">
 	<h2>Aufnahme planen</h2>
 
 	<h3>Eine einzelne Sendung aufnehmen</h3>

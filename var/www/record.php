@@ -53,7 +53,7 @@
 
 <!--- Seiteninhalt --->
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
 	<h2>Aufnahme planen</h2>
 
 	<p>Was m&ouml;chtest du aufnehmen?</p>
@@ -66,7 +66,7 @@
 	<option value="">Sender ausw&auml;hlen</option>
 
 	<?php
-	$abfrage = "SELECT name,alias FROM sender";
+	$abfrage = "SELECT name,alias FROM sender ORDER BY name";
 	$ergebnis = mysql_query($abfrage);
 
 	while($row = mysql_fetch_object($ergebnis))

@@ -31,7 +31,7 @@
 
 <!--- Seiteninhalt --->
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
 	<h2>Aufnahmen</h2>
 
 <?php
@@ -81,6 +81,7 @@
 		exec("rm $datei");
                 $loesch = mysql_query($loeschen);
                 	}
+		unset($del);
         	}
 ?>
 

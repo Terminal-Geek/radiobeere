@@ -46,7 +46,7 @@
 
 <!--- Seiteninhalt --->
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
         <h2>Aufnahme planen</h2>
 
         <p>W&auml;hle Uhrzeit und L&auml;nge der Aufnahme.</p>

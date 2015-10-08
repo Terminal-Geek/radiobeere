@@ -23,7 +23,7 @@
 
 <!--- Seiteninhalt --->
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
 	<h2>Podcast</h2>
 
 	<p>Seiteninhalt.</p>

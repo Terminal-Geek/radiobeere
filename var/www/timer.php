@@ -23,7 +23,7 @@
 
 <!--- Seiteninhalt --->
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
 	<h2>Timer verwalten</h2>
 
 	<p>W&auml;hle die Timer aus, die du l&ouml;schen m&ouml;chest.</p>
@@ -40,6 +40,7 @@
                 $loesch = mysql_query($loeschen);
                 }
                 exec("sudo /home/pi/radiobeere/rb-timer-update.py");
+                unset($del);
 	}
 ?>
 
