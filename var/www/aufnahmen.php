@@ -41,7 +41,7 @@
 <!--- Filtern nach Sender --->
 
         <div class="ui-field-contain">
-        <form method="post">
+        <form method="post" id="filter">
         <select name="filter_sender" onchange="if(this.value != 0) { this.form.submit(); }">
 	<option value="alle">Alle Sender</option>
 <?php
@@ -82,6 +82,7 @@
                 $loesch = mysql_query($loeschen);
                 	}
 		unset($del);
+                echo "<script type=\"text/javascript\">window.location.reload(true);</script>";
         	}
 ?>
 
@@ -109,7 +110,7 @@
 
 <!--- Datenausgabe --->
 
-        <form method="post">
+        <form method="post" id="loeschen">
 
 <?php
 	if($menge > 1)
@@ -160,7 +161,7 @@
 <?php
         if($menge >= 1)
 	{
-	echo "<form method=\"post\">";
+	echo "<form method=\"post\" id=\"pagination\">";
 
         echo "<input type=\"hidden\" name=\"filter_sender\" value=\"$filter_sender\">";
 	echo "<b>Seite:</b>&nbsp;&nbsp;";

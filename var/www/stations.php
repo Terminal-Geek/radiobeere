@@ -83,7 +83,7 @@
 
 	<h3>Sender hinzufügen</h3>
 
-        <form method="POST" id="hinzufuegen">
+        <form method="POST" id="hinzufuegen_sender">
 
 	<label for="name">Name:
 	<input type="text" name="name" id="name">
@@ -92,7 +92,7 @@
         <input type="text" name="url" id="url">
         </label>
 	<br>
-        <input type="submit" value="Sender speichern" form="hinzufuegen">
+        <input type="submit" value="Sender speichern" form="hinzufuegen_sender">
 
 	<p>Bitte keine Stream-Adressen angeben, die auf <b>.m3u</b> enden.
 	Eine &Uuml;bersicht aller &ouml;ffentlich-rechtlichen Radioprogramme findest du hier:<br>
@@ -106,7 +106,7 @@
 
 	<h3>Sender l&ouml;schen</h3>
 
-        <form method="POST" id="loeschen">
+        <form method="POST" id="loeschen_sender">
 
 <?php
         $abfrage = "SELECT * FROM sender ORDER BY name";
@@ -139,7 +139,7 @@
         <div data-role="main" class="ui-content" align="center">
         <h4 class="ui-title">Sender wirklich l&ouml;schen?</h4>
 	<p>Die zugeh&ouml;rigen Timer werden ebenfalls gel&ouml;scht!</p>
-	<input id="submit" name="submit" type="submit" form="loeschen" value="Ja" data-inline="true">
+	<input id="submit" name="submit" type="submit" form="loeschen_sender" value="Ja" data-inline="true">
 	<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">Nein</a>
 	</div>
         </div>
