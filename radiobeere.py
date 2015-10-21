@@ -9,22 +9,35 @@ import time
 from mutagen.mp3 import MP3
 import datetime
 
+filename_pattern = "/var/www/Aufnahmen/aufnahme_fertig_*.mp3"
+connection = MySQLdb.connect(login.DB_HOST, login.DB_USER, login.DB_PASSWORD, login.DB_DATABASE)
+
 
 def audio_length(filename):
     length = str(datetime.timedelta(seconds = int((MP3(filename)).info.length)))
     return length
 
+
 def extract_metadata(filename):
-    filename, extension = os.path.splitext(filename)
-    station_alias, year, month, day, hour, minutes, _ = filename.split('_')
-    return station_alias, year, month, day, hour, minutes
+    _, _, station_alias, year, month, day, hour, minutes, _ = filename.split('_')
+    timestamp = int(time.mktime((int(year), int(month), int(day), int(hour), int(minutes), 0, 0, 0, -1)))
+    return station_alias, year, month, day, hour, minutes, timestamp
 
 def main():
-    station_alias, year, month, day, hour, minutes = extract_metadata (
-        'kiraka_2015_10_13_22_00_05'
-    )
-    print(minutes)
-
+    for path in glob(filename_pattern):
+        filename, extension = os.path.splitext(os.path.basename(path))
+        station_alias, year, month, day, hour, minutes, timestamp = extract_metadata (filename)
+        length = audio_length(path)
+        print(filename)
+        print(extension)
+        print(station_alias)
+        print(year)
+        print(month)
+        print(day)
+        print(hour)
+        print(minutes)
+        print(timestamp)
+        print(length)
 
 
 def rest():
