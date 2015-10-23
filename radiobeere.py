@@ -8,6 +8,7 @@ from glob import glob
 import os
 import time
 from mutagen.mp3 import MP3
+from mutagen.id3 import ID3, TIT2
 import datetime
 
 
@@ -38,6 +39,20 @@ def get_station_name(connection, station_alias):
             raise KeyError('Sender nicht in der Datenbank vorhanden')
 
         return row[0]
+
+
+def id3_tag():
+
+    titel = "Noch ein Test"
+
+    audio = ID3()
+    audio.save("/var/www/Aufnahmen/aufnahme_fertig_wdr2_2015_10_14_10_20_10.mp3")
+
+    audio = ID3("/var/www/Aufnahmen/aufnahme_fertig_wdr2_2015_10_14_10_20_10.mp3")
+    audio.add(TIT2(encoding=3, text = u"%s" % titel))
+    audio.save(v2_version=3)
+
+    print(audio.pprint())
 
 
 def write_to_db(connection, date, time, station, new_filename, timestamp, length):
