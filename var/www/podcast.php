@@ -26,7 +26,12 @@
         <div data-role="main" class="ui-content">
 	<h2>Podcast</h2>
 
-	<p>Seiteninhalt.</p>
+	<p>Klicke den Link an, um deine eigenen Radio-Aufnahmen als Podcast zu
+	abonnieren. Sollte das nicht automatisch klappen, kannst du den Link kopieren
+	und in deinem Podcast-Programm (z.B. iTunes) einfügen, um den Podcast von Hand
+	zu abonnieren.</p>
+
+	<p><a href="http://radiobeere/podcast/dircaster.php" target="_blank">http://radiobeere/podcast/dircaster.php</a></p>
 
 
 
