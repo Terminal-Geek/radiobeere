@@ -96,7 +96,7 @@
         <?php
         $eintrag = "INSERT INTO timer (sender, alias, stunde, minute, wochentage, dauer, tag, monat,zeitstempel) VALUES ('$sender', '$alias', '$stunde', '$minute', '$wochentage', '$sekunden', '$tag', '$monat', '$zeitstempel')";
         $eintragen = mysql_query($eintrag);
-	exec("sudo /home/pi/radiobeere/rb-cron-add.py");
+	exec("sudo /home/pi/radiobeere/rb-timer-update.py");
 	?>
 
 <!--- Seiteninhalt --->
