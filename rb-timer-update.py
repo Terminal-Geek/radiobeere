@@ -2,73 +2,111 @@
 # -*- coding: utf8 -*-
 
 import MySQLdb
+from contextlib import closing
 import os
 import time
+
 import login
 
-def delete_outdated_from_db():
 
-    connection = MySQLdb.connect(login.DB_HOST, login.DB_USER, login.DB_PASSWORD, login.DB_DATABASE)
-    cursor = connection.cursor()
-    ABFRAGE = "SELECT * FROM timer"
-    cursor.execute(ABFRAGE)
-    ERGEBNIS = cursor.fetchall()
-    for TIMER in ERGEBNIS:
-        ID = TIMER[0]
-        ZEITSTEMPEL = TIMER[9]
-        JETZT = time.time()
-        if ZEITSTEMPEL != 0 and JETZT > ZEITSTEMPEL:
-            LOESCHEN = "DELETE FROM timer WHERE id = %s"
-            cursor.execute(LOESCHEN, (ID,))
+PATH_RECORDINGS = '/var/www/Aufnahmen'
+MUTE_ERRORS = '> /dev/null 2>&1'
+
+
+def delete_outdated_from_db(connection, cursor):
+
+    cursor.execute('SELECT * FROM timer')
+    result = cursor.fetchall()
+    for db_record in result:
+        db_record_id = db_record[0]
+        timestamp = db_record[9]
+        now = time.time()
+        if timestamp != 0 and now > timestamp:
+            delete_db_entry = 'DELETE FROM timer WHERE id = %s'
+            cursor.execute(delete_db_entry, (db_record_id,))
         connection.commit()
-    cursor.close()
-    connection.close()
+
 
 def wipe_cron():
-    CRONTAB = open("/etc/crontab","r")
-    CRONTAB_NEU = open("/etc/crontab_neu","w")
-    SUCHWORT = "streamripper"
-    for ZEILE in CRONTAB:
-        PRUEFUNG = SUCHWORT in ZEILE
-        if PRUEFUNG == False:
-            CRONTAB_NEU.write(ZEILE)
-    CRONTAB.close()
-    CRONTAB_NEU.close()
 
-def add_timer():
-    connection = MySQLdb.connect(login.DB_HOST, login.DB_USER, login.DB_PASSWORD, login.DB_DATABASE)
-    cursor = connection.cursor()
-    ABFRAGE = "SELECT * FROM timer"
-    cursor.execute(ABFRAGE)
-    ERGEBNIS = cursor.fetchall()
-    CRONTAB_NEU = open("/etc/crontab_neu","a+")
-    for ZEILE in ERGEBNIS:
-        ALIAS = ZEILE[2]
-        ABFRAGE2 = "SELECT url FROM sender WHERE alias = %s"
-        cursor.execute(ABFRAGE2, (ALIAS,))
-        ERGEBNIS2 = cursor.fetchone()
-        URL = ERGEBNIS2[0]
-        STUNDE = ZEILE[3]
-        MINUTE = ZEILE[4]
-        WOCHENTAGE = ZEILE[5]
-        DAUER = ZEILE[6]
-        TAG = ZEILE[7]
-        MONAT = ZEILE[8]
+    crontab = open('/etc/crontab', 'r')
+    crontab_new = open('/etc/crontab_neu', 'w')
+    searchstring = 'streamripper'
+    for line in crontab:
+        find_searchstring = searchstring in line
+        if find_searchstring is False:
+            crontab_new.write(line)
+    crontab.close()
+    crontab_new.close()
 
-        TIMER = MINUTE+" "+STUNDE+" "+TAG+" "+MONAT+" "+WOCHENTAGE+" root /usr/bin/streamripper "+URL+" -d /var/www/Aufnahmen -a aufnahme_aktiv_"+ALIAS+"_\\%d -A -l "+DAUER+" > /dev/null 2>&1 ; rm /var/www/Aufnahmen/*.cue ; rename 's/aufnahme_aktiv_"+ALIAS+"/aufnahme_fertig_"+ALIAS+"/' /var/www/Aufnahmen/*.mp3 ; chmod 777 /var/www/Aufnahmen/aufnahme_fertig_"+ALIAS+"* ; /home/pi/radiobeere/rb-rec-add.py > /dev/null 2>&1"
 
-        CRONTAB_NEU.write(TIMER+'\n')
+def create_cron_entry(cursor, db_record):
 
-    CRONTAB_NEU.close
-    cursor.close()
-    connection.close()
+    alias = db_record[2]
+    cursor.execute('SELECT url FROM sender WHERE alias = alias')
+    url = cursor.fetchone()[0]
+
+    cron_entry = [
+                db_record[4],
+                db_record[3],
+                db_record[7],
+                db_record[8],
+                db_record[5],
+                'root /usr/bin/streamripper',
+                url,
+                '-d',
+                PATH_RECORDINGS,
+                '-a aufnahme_aktiv_'
+                        + alias
+                        + '_\\%d -A -l',
+                db_record[6],
+                MUTE_ERRORS,
+                '; rm',
+                PATH_RECORDINGS
+                        + '/*.cue ;',
+                'rename \'s/aufnahme_aktiv_'
+                        + alias
+                        + '/aufnahme_fertig_'
+                        + alias
+                        + '/\'',
+                PATH_RECORDINGS
+                        + '/*.mp3 ;',
+                'chmod 777',
+                PATH_RECORDINGS
+                        + '/aufnahme_fertig_'
+                        + alias
+                        + '* ;',
+                '/home/pi/radiobeere/rb-rec-add.py',
+                MUTE_ERRORS
+                ]
+
+    cron_entry = ' '.join(cron_entry)
+
+    return cron_entry
+
 
 def main():
 
-    delete_outdated_from_db()
     wipe_cron()
-    add_timer()
-    os.rename("/etc/crontab_neu", "/etc/crontab")
+    crontab_new = open('/etc/crontab_neu', 'a+')
+
+    with closing(MySQLdb.connect(
+            login.DB_HOST, login.DB_USER,
+            login.DB_PASSWORD, login.DB_DATABASE
+            )) as connection:
+
+        with closing(connection.cursor()) as cursor:
+            delete_outdated_from_db(connection, cursor)
+            cursor.execute('SELECT * FROM timer')
+            result = cursor.fetchall()
+
+            for db_record in result:
+                cron_entry = create_cron_entry(cursor, db_record)
+                crontab_new.write(cron_entry + '\n')
+
+    crontab_new.close
+    os.rename('/etc/crontab_neu', '/etc/crontab')
+
 
 if __name__ == '__main__':
     main()
