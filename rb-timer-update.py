@@ -42,8 +42,7 @@ def wipe_cron():
 
 def create_cron_entry(cursor, db_record):
 
-    alias = db_record[2]
-    cursor.execute('SELECT url FROM sender WHERE alias = alias')
+    cursor.execute('SELECT url FROM sender WHERE alias=%s', (db_record[2]),)
     url = cursor.fetchone()[0]
 
     cron_entry = [
@@ -57,7 +56,7 @@ def create_cron_entry(cursor, db_record):
                 '-d',
                 PATH_RECORDINGS,
                 '-a aufnahme_aktiv_'
-                        + alias
+                        + db_record[2]
                         + '_\\%d -A -l',
                 db_record[6],
                 MUTE_ERRORS,
@@ -65,16 +64,16 @@ def create_cron_entry(cursor, db_record):
                 PATH_RECORDINGS
                         + '/*.cue ;',
                 'rename \'s/aufnahme_aktiv_'
-                        + alias
+                        + db_record[2]
                         + '/aufnahme_fertig_'
-                        + alias
+                        + db_record[2]
                         + '/\'',
                 PATH_RECORDINGS
                         + '/*.mp3 ;',
                 'chmod 777',
                 PATH_RECORDINGS
                         + '/aufnahme_fertig_'
-                        + alias
+                        + db_record[2]
                         + '* ;',
                 '/home/pi/radiobeere/rb-rec-add.py',
                 MUTE_ERRORS
