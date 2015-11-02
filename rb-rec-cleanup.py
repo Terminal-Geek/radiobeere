@@ -2,34 +2,52 @@
 # -*- coding: utf8 -*-
 
 import MySQLdb
+from contextlib import closing
 from glob import glob
 import os
+
 import login
+
+
+FILENAME_PATTERN = '/var/www/Aufnahmen/*.mp3'
+PATH_RECORDINGS = '/var/www/Aufnahmen/'
+
+
+def delete_files_without_db_entry(cursor):
+
+    for full_path in glob(FILENAME_PATTERN):
+        filename = os.path.basename(full_path)
+        db_request = 'SELECT COUNT(*) FROM aufnahmen WHERE datei = %s'
+        cursor.execute(db_request, (filename,))
+        check = cursor.fetchone()[0]
+        if check == 0:
+            os.remove(full_path)
+
+
+def delete_db_entries_without_file(connection, cursor):
+
+    cursor.execute('SELECT datei FROM aufnahmen')
+    result = cursor.fetchall()
+    for filename in result:
+        check = os.path.isfile(PATH_RECORDINGS + filename[0])
+        if check is False:
+            db_request = 'DELETE FROM aufnahmen WHERE datei = %s'
+            cursor.execute(db_request, (filename[0],))
+            connection.commit()
+
 
 def main():
 
-    connection = MySQLdb.connect(login.DB_HOST, login.DB_USER, login.DB_PASSWORD, login.DB_DATABASE)
-    cursor = connection.cursor()
+    with closing(MySQLdb.connect(
+            login.DB_HOST, login.DB_USER,
+            login.DB_PASSWORD, login.DB_DATABASE
+            )) as connection:
 
-    for PFAD in glob('/var/www/Aufnahmen/*.mp3'):
-        DATEI = os.path.basename(PFAD)
-        ABFRAGE = "SELECT COUNT(*) FROM aufnahmen WHERE datei = %s"
-        cursor.execute(ABFRAGE, (DATEI,))
-        CHECK = cursor.fetchone()[0]
-        if CHECK == 0:
-            os.remove(PFAD)
+        with closing(connection.cursor()) as cursor:
 
-    PFAD = '/var/www/Aufnahmen/'
-    cursor.execute("SELECT datei FROM aufnahmen")
-    ABFRAGE = cursor.fetchall() 
-    for DATEI in ABFRAGE:
-        CHECK = os.path.isfile(PFAD+DATEI[0])
-        if CHECK == False:
-            REQUEST = "DELETE FROM aufnahmen WHERE datei = %s"
-            cursor.execute(REQUEST, (DATEI[0],))
-            connection.commit()
+            delete_files_without_db_entry(cursor)
+            delete_db_entries_without_file(connection, cursor)
 
-    connection.close()
 
 if __name__ == '__main__':
     main()
