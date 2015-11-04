@@ -7,6 +7,7 @@ from glob import glob
 import os
 import time
 import datetime
+from email.utils import formatdate
 
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, TIT2, TPE1, TALB
@@ -23,8 +24,9 @@ def audio_length(filename):
     length = str(
         datetime.timedelta(seconds=int((MP3(filename)).info.length))
     )
+    length_bytes = os.path.getsize(filename)
 
-    return length
+    return length, length_bytes
 
 
 def extract_metadata(filename):
@@ -67,18 +69,21 @@ def id3_tag(path, station, recording_time):
     audio.save(v2_version=3)
 
 
-def write_to_db(connection, recording_time, station, new_filename, length):
+def write_to_db(connection, recording_time, station,
+                new_filename, length, length_bytes):
 
-    date = '{0:%Y-%m-%d}'.format(recording_time)
-    time = '{0:%H:%M}'.format(recording_time)
+    rec_date = '{0:%Y-%m-%d}'.format(recording_time)
+    rec_time = '{0:%H:%M}'.format(recording_time)
     timestamp = int(recording_time.strftime("%s"))
+    pub_date = formatdate(time.time(), True)
 
     with closing(connection.cursor()) as cursor:
 
         cursor.execute('INSERT INTO aufnahmen \
-        (datum, uhrzeit, sender, datei, zeitstempel, laenge) \
-        VALUES (%s,%s,%s,%s,%s,%s)',
-                (date, time, station, new_filename, timestamp, length,))
+        (datum, uhrzeit, sender, datei, zeitstempel, laenge, bytes, pubdate) \
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                (rec_date, rec_time, station, new_filename,
+                 timestamp, length, length_bytes, pub_date))
 
         connection.commit()
 
@@ -94,7 +99,7 @@ def main():
             directory = os.path.dirname(path)
             filename, extension = os.path.splitext(os.path.basename(path))
 
-            length = audio_length(path)
+            length, length_bytes = audio_length(path)
             station_alias, recording_time = extract_metadata(filename)
             station = get_station_name(connection, station_alias)
             new_filename = '{0}_{1:%Y-%m-%d}_{1:%H-%M}{2}'.format(
@@ -103,7 +108,8 @@ def main():
 
             id3_tag(path, station, recording_time)
             write_to_db(
-                    connection, recording_time, station, new_filename, length
+                    connection, recording_time, station,
+                    new_filename, length, length_bytes
             )
             os.rename(path, (os.path.join(directory, new_filename)))
 
