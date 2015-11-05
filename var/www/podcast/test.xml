@@ -6,34 +6,44 @@
 
 <title>RadioBeere - KiRaKa</title>
 <link>http://dev</link>
-<language>de-de</language>
-<itunes:subtitle>Hören, wann du willst!</itunes:subtitle>
-<itunes:author>KiRaKa</itunes:author>
-<itunes:summary>Hier hörst du alle Sendungen, die du mit der RadioBeere aufgenommen hast.</itunes:summary>
 <description>Hier hörst du alle Sendungen, die du mit der RadioBeere aufgenommen hast.</description>
-<itunes:image href="http://dev/img/podcast/default.jpg" />
+<language>de-de</language>
+<pubDate>Tue, 03 Nov 2015 19:30:00 +0100</pubDate>
+<lastBuildDate>Tue, 03 Nov 2015 19:30:00 +010</lastBuildDate>
+<generator>RadioBeere</generator>
+<category>Society &amp; Culture</category>
 <image>
 <url>http://dev/img/podcast/default.jpg</url>
 <title>RadioBeere - KiRaKa</title>
 <link>http://dev</link>
 </image>
+
+<itunes:subtitle>Hören, wann du willst!</itunes:subtitle>
+<itunes:author>KiRaKa</itunes:author>
+<itunes:summary>Hier hörst du alle Sendungen, die du mit der RadioBeere aufgenommen hast.</itunes:summary>
+<itunes:image href="http://dev/img/podcast/default.jpg" />
 <itunes:category text="Society &amp; Culture" />
 
 
 <item>
+
 <title>KiRaKa, 03.11.2015, 19.30 Uhr</title>
-<itunes:author>KiRaKa</itunes:author>
-<itunes:subtitle>Hören, wann du willst!</itunes:subtitle>
-<itunes:image href="http://dev/img/podcast/default.jpg" />
+<link>http://dev/Aufnahmen/kiraka_2015-25-10_14-05.mp3</link>
+<description>Aufgenommen mit der RadioBeere.</description>
+<enclosure url="http://dev/Aufnahmen/kiraka_2015-11-03_19-30.mp3" length="28941946" type="audio/mpeg" />
+<guid isPermaLink="false">http://dev/podcast/kiraka_216</guid>
+<pubDate>Tue, 03 Nov 2015 19:30:00 +0100</pubDate>
 <image>
 <url>http://dev/img/podcast/default.jpg</url>
 <title>RadioBeere - KiRaKa</title>
 <link>http://dev</link>
 </image>
-<enclosure url="http://dev/Aufnahmen/kiraka_2015-11-03_19-30.mp3" length="28941946" type="audio/mpeg" />
-<guid>http://dev/podcast/kiraka_216</guid>
-<pubDate>Tue, 03 Nov 2015 19:30:00 +0100</pubDate>
+
+<itunes:author>KiRaKa</itunes:author>
+<itunes:subtitle>Hören, wann du willst!</itunes:subtitle>
+<itunes:image href="http://dev/img/podcast/default.jpg" />
 <itunes:duration>0:30:07</itunes:duration>
+
 </item>
 
 </channel>
