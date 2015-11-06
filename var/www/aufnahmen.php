@@ -45,7 +45,7 @@
         <select name="filter_sender" onchange="if(this.value != 0) { this.form.submit(); }">
 	<option value="alle">Alle Sender</option>
 <?php
-        $abfrage = "SELECT name FROM sender";
+        $abfrage = "SELECT name FROM sender ORDER BY name";
         $ergebnis = mysql_query($abfrage);
 
         while($row = mysql_fetch_object($ergebnis))

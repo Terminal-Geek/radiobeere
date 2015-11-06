@@ -76,6 +76,9 @@ def create_cron_entry(cursor, db_record):
                         + db_record[2]
                         + '* ;',
                 '/home/pi/radiobeere/rb-rec-add.py',
+                MUTE_ERRORS,
+                '; /home/pi/radiobeere/podcast.py',
+                db_record[2],
                 MUTE_ERRORS
                 ]
 
