@@ -65,23 +65,43 @@
         </form>
         </div>
 
-<!--- Einträge in der DB und Files im Dateisystem loeschen --->
+<!--- Einträge in der DB und Files im Dateisystem loeschen, Podcast neu generieren --->
 
 <?php
         if ($_POST['del'])
                 {
                 foreach ($_POST['del'] as $eintrag) {
+                
                 $loeschen = "DELETE FROM aufnahmen WHERE id = $eintrag";
-	        $abfrage = "SELECT datei FROM aufnahmen WHERE id = $eintrag";
-	        $ergebnis = mysql_query($abfrage);
-		while($row = mysql_fetch_object($ergebnis))
-   			{
-   			$datei = "/var/www/Aufnahmen/$row->datei";
-			}
-		exec("rm $datei");
-                $loesch = mysql_query($loeschen);
+	        
+	        		$abfrage = "SELECT datei FROM aufnahmen WHERE id = $eintrag";
+	        		$ergebnis = mysql_query($abfrage);
+	        		while($row = mysql_fetch_object($ergebnis))
+   					{
+   						$datei = "/var/www/Aufnahmen/$row->datei";
+					}
+                
+                $abfrage = "SELECT sender FROM aufnahmen WHERE id = $eintrag";
+                $ergebnis = mysql_query($abfrage);
+                while($row = mysql_fetch_object($ergebnis))
+                	{
+                		$sender = $row->sender;
                 	}
-		unset($del);
+                	
+                $abfrage = "SELECT alias FROM sender WHERE name = '$sender'";
+                $ergebnis = mysql_query($abfrage);
+					while($row = mysql_fetch_object($ergebnis))
+                	{
+                		$alias = $row->alias;
+                	}
+
+                	$loesch = mysql_query($loeschen);
+	               	exec("sudo /home/pi/radiobeere/podcast.py $alias");
+						exec("rm $datei");
+
+
+                	}
+					unset($del);
                 echo "<script type=\"text/javascript\">window.location.reload(true);</script>";
         	}
 ?>
