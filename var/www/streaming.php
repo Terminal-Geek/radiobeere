@@ -28,10 +28,10 @@
 
 <p>Mit Hilfe der RadioBeere kannst du deine Aufnahmen auch
 auf Geräten wiedergeben, die den so genannten DLNA-Standard unterstützen.
-Diese Technik steckt in vielen moderen Mediengeräten drin, die Funktion
-ist oft bereits im Auslieferungszustand integriert: Smart TVs, AV-Receiver,
-Internetradios, Smartphones, Tablets, Streaming Clients ...
-Bei anderen Geräten kann sie über Apps nachgerüstet werden.</p>
+Diese Technik steckt in vielen moderen Mediengeräten drin: in Smart TVs,
+AV-Receivern, Internetradios, Smartphones, Tablets, Streaming Clients ...
+Die DLNA-Player-Funktion ist oft bereits im Auslieferungszustand integriert
+oder sie kann über Apps nachgerüstet werden.</p>
 
 <p>Der entscheidende Vorteil bei dieser Technik ist, dass die Medien, die
 wiedergegeben sollen, nicht erst heruntergeladen werden müssen. Sie
