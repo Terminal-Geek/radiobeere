@@ -71,6 +71,7 @@
                 {
 	        $eintrag = "INSERT INTO sender (alias, name, url) VALUES ('$alias', '$name', '$url')";
         	$eintragen = mysql_query($eintrag);
+			exec("sudo /home/pi/radiobeere/podcast.py $alias");
                 echo "<b><font color=\"#f00\">Sender gespeichert!</font></b><br><br>";
                 }
 	unset($row);
