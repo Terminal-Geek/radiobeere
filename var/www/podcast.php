@@ -21,17 +21,31 @@
                 <a href="/" data-icon="home" data-iconpos="notext">Startseite</a>
         </div>
 
-<!--- Seiteninhalt --->
+<?php
+        include("include/db-connect.php")
+?>
 
         <div data-role="main" class="ui-content">
 	<h2>Podcast</h2>
 
-	<p>Klicke den Link an, um deine eigenen Radio-Aufnahmen als Podcast zu
-	abonnieren. Sollte das nicht automatisch klappen, kannst du den Link kopieren
-	und in deinem Podcast-Programm (z.B. iTunes) einfügen, um den Podcast von Hand
-	zu abonnieren.</p>
+	<p>Abonniere deine eigenen Radio-Aufnahmen als Podcast. Sollte ein Klick
+	auf den jeweiligen Link nicht automatisch dein Podcast-Programm öffnen,
+	kopiere den Link und füge ihn in deinem Podcast-Programm von Hand ein.
+	In iTunes zum Beispiel gehst du dafür in der Podcast-Ansicht auf
+	<b>Ablage - > Podcast abonnieren</b>.</p>
 
-	<p><a href="http://radiobeere/podcast/dircaster.php" target="_blank">http://radiobeere/podcast/dircaster.php</a></p>
+	<p>
+<?php
+		$hostname = gethostname();
+	  	$abfrage = "SELECT * FROM sender ORDER BY name";
+	  	$ergebnis = mysql_query($abfrage);
+	 	while($row = mysql_fetch_object($ergebnis))
+		 {
+		 	$feed = "http://$hostname/podcast/$row->alias.xml";
+		 echo "<b>$row->name:</b><br><a href=\"$feed\" target=\"_blank\">$feed</a><br><br>";
+		}
+?>	  
+	</p>
 
 
        <div class="illu-content-wrapper">
