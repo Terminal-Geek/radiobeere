@@ -86,9 +86,9 @@
         <br><br><button type="submit" name="submit">N&auml;chster Schritt</button>
 	</form>
 
-        <div class="illu-contentbereich">
-        <center><img src="/img/timer_256.png" alt="Aufnahme planen"></center>
-	</div>
+       <div class="illu-content-wrapper">
+        <div class="illu-content illu-record">
+        </div></div>
 
 </div>
 

@@ -147,9 +147,9 @@
         </form>
 
 
-        <div class="illu-contentbereich">
-        <center><img src="/img/stations_256.png" alt=""></center>
-        </div>
+       <div class="illu-content-wrapper">
+        <div class="illu-content illu-stations">
+        </div></div>
 
 	</div>
 

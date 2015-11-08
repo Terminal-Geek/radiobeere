@@ -201,12 +201,11 @@
 	}
 ?>
 
-        <div class="illu-contentbereich">
-        <center><img src="/img/player_256.png" alt=""></center>
-        </div>
+       <div class="illu-content-wrapper">
+        <div class="illu-content illu-player">
+        </div></div>
 
 	</div>
-
 
 <!--- Navigation --->
 

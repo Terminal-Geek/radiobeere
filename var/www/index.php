@@ -20,12 +20,17 @@
 		<h1>RadioBeere</h1>
 	</div>
 
-	<div data-role="main" class="ui-content" style="max-width:100% !important; text-align:center;">
-        	<a href="record.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/timer_256.png" alt="Aufnahme planen" title="Aufnahme planen"><br>Aufnahme planen</a>
-                <a href="timer.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/manage_timer_256.png" alt="Timer verwalten" title="Timer verwalten"><br>Timer verwalten</a>
-                <a href="aufnahmen.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/player_256.png" alt="Player" title="Player"><br>Player</a>
-                <a href="podcast.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/podcast_256.png" alt="Podcast" title="Podcast"><br>Podcast</a>
-                <a href="stations.php" class="ui-btn ui-input-btn ui-shadow ui-btn-inline""><img src="/img/stations_256.png" alt="Sender verwalten" title="Sender verwalten"><br>Sender verwalten</a>
+	<div data-role="main" class="ui-content" style="max-width:1024px !important; text-align:center">
+	
+	<a href="record.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button record"></div>Planen</div></a>
+	<a href="timer.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button timer"></div>Timer</div></a>
+	<a href="aufnahmen.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button player"></div>Player</div></a>
+	<a href="podcast.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button podcast"></div>Podcast</div></a>
+	<a href="streaming.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button streaming"></div>Streaming</div></a>	
+	<a href="stations.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button stations"></div>Sender</div></a>
+	<a href="help.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button help"></div>Hilfe</div></a>
+	<a href="reboot.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button reboot"></div>Neustart</div></a>
+
 	</div>
 
         <?php

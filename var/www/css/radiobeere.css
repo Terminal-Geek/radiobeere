@@ -1,20 +1,96 @@
-@media only screen and (min-width: 1280px){
-        .ui-page {
-            width: 960px !important;
-            margin: 0 auto !important;
-            position: relative !important;
-            border-right: 0px outset !important;
-            border-left: 0px outset !important;
-        }
-    }
-
 .ui-content {
-        max-width:600px;
-        clear: both;
-        padding: 10px;
+	max-width:600px;
+	clear: both;
+	padding: 10px;
 	margin: 0 auto;
 }
 
 h2 	{
 	text-align:center;
 	}
+
+.hp-wrapper {
+	width: 33%;
+	min-width: 100px;
+	max-width: 265px;
+	float: left;
+	margin: 0 auto;
+}
+
+.hp-button {
+	margin: 0 auto;
+	padding-top: 100%;
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.record {
+	background-image: url(/img/record.svg);
+}
+
+.player {
+	background-image: url(/img/player.svg);
+}
+
+.timer {
+	background-image: url(/img/timer.svg);
+}
+
+.podcast {
+	background-image: url(/img/podcast.svg);
+}
+
+.streaming {
+	background-image: url(/img/streaming.svg);
+}
+
+.stations {
+	background-image: url(/img/stations.svg);
+}
+
+.help {
+	background-image: url(/img/help.svg);
+}
+
+.reboot {
+	background-image: url(/img/reboot.svg);
+}
+
+.illu-content-wrapper {
+	min-width: 150px;
+	max-width: 350px;
+	margin: 0 auto;
+	padding: 30px;
+}
+.illu-content {
+	margin: 0 auto;
+	padding-top: 100%;
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.illu-record{
+	background-image: url(/img/record.svg);
+}
+.illu-timer{
+	background-image: url(/img/timer.svg);
+}
+.illu-player{
+	background-image: url(/img/player.svg);
+}
+.illu-podcast{
+	background-image: url(/img/podcast.svg);
+}
+.illu-streaming{
+	background-image: url(/img/streaming.svg);
+}
+.illu-stations{
+	background-image: url(/img/stations.svg);
+}
+.illu-help{
+	background-image: url(/img/help.svg);
+}
+.illu-reboot{
+	background-image: url(/img/reboot.svg);
+}

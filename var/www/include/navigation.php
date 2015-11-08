@@ -5,8 +5,9 @@
                 <li><a href="timer.php">Timer verwalten</a></li>
                 <li><a href="aufnahmen.php">Player</a></li>
                 <li><a href="podcast.php">Podcast</a></li>
-                <li><a href="stations.php">Sender verwalten</a></li>
-                <li><a href="dlna.php">Streaming Server</a></li>
+                <li><a href="streaming.php">Streaming Server</a></li>
+                <li><a href="stations.php">Sender verwalten</a></li> 
                 <li><a href="help.php">Hilfe</a></li>
+                <li><a href="help.php">System neu starten</a></li>
                 </ul>
         </div>

@@ -21,9 +21,12 @@
                 <a href="/" data-icon="home" data-iconpos="notext">Startseite</a>
         </div>
 
+
+
 <!--- Seiteninhalt --->
 
         <div data-role="main" class="ui-content">
+
 	<h2>Timer verwalten</h2>
 
 	<p>W&auml;hle die Timer aus, die du l&ouml;schen m&ouml;chest.</p>
@@ -99,10 +102,9 @@
 	<input type="submit" value="Ausgewählte Timer löschen">
 	</form>
 
-
-        <div class="illu-contentbereich">
-        <center><img src="/img/manage_timer_256.png" alt=""></center>
-        </div>
+        <div class="illu-content-wrapper">
+        <div class="illu-content illu-timer">
+        </div></div>
 
 	</div>
 

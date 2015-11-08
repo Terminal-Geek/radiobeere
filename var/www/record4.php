@@ -129,9 +129,9 @@
         <button type="submit" name="reset" id="reset" value="1">Nein, nochmal von vorne</button>
         </form>
 
-        <div align="center" class="illu-contentbereich">
-        <center><img src="/img/timer_256.png" alt="Aufnahmen planen">
-        </div>
+       <div class="illu-content-wrapper">
+        <div class="illu-content illu-record">
+        </div></div>
 
 </div>
 

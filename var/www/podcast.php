@@ -34,10 +34,9 @@
 	<p><a href="http://radiobeere/podcast/dircaster.php" target="_blank">http://radiobeere/podcast/dircaster.php</a></p>
 
 
-
-        <div class="illu-contentbereich">
-        <center><img src="/img/podcast_256.png" alt=""></center>
-        </div>
+       <div class="illu-content-wrapper">
+        <div class="illu-content illu-podcast">
+        </div></div>
 
 	</div>
 
