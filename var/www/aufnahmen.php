@@ -87,13 +87,8 @@
                 	{
                 		$sender = $row->sender;
                 	}
-                	
-                $abfrage = "SELECT alias FROM sender WHERE name = '$sender'";
-                $ergebnis = mysql_query($abfrage);
-					while($row = mysql_fetch_object($ergebnis))
-                	{
-                		$alias = $row->alias;
-                	}
+					$alias = strtolower(eregi_replace(" ", "", $sender));
+					$alias = preg_replace("/[^0-9a-zA-Z \-\_]/", "", $alias);                	
 
                 	$loesch = mysql_query($loeschen);
 	               	exec("sudo /home/pi/radiobeere/podcast.py $alias");
