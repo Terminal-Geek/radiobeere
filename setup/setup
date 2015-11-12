@@ -1,0 +1,106 @@
+#!/bin/bash
+
+# Install packages via package manager
+
+apt-get install samba-common samba apache2 php5 mysql-server php5-mysql phpmyadmin \
+minidlna streamripper python-mysqldb
+
+# Download and install Mutagen
+
+cd /home/pi
+wget https://bitbucket.org/lazka/mutagen/downloads/mutagen-1.31.tar.gz
+tar -xf mutagen*.gz
+cd mutagen*
+./setup.py build
+su -c "./setup.py install"
+cd /home/pi
+rm mutagen*.gz
+
+# Generate random password for MySQL user radiobeere
+
+password=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32})
+
+cd /home/pi/radiobeere/setup
+
+sed 's/password/'$password'/g' radiobeere.sql > temp_file
+mv temp_file radiobeere.sql
+
+sed 's/password/'$password'/g' ../login.py > temp_file
+mv temp_file ../login.py
+chmod 755 ../login.py
+
+sed 's/password/'$password'/g' ../var/www/include/db-connect.php > temp_file
+mv temp_file ../var/www/include/db-connect.php
+chmod 644 ../var/www/include/db-connect.php
+
+# Create MySQL user radiobeere, the database radiobeere and populate it with tables
+
+cat radiobeere.sql | mysql -u root -p
+
+# Move frontend files from radiobeere repository to web root
+
+mv ../var/www/* /var/www
+
+# Create Samba share
+
+cp /etc/samba/smb.conf /etc/samba/smb.conf.original
+
+cat >> /etc/samba/smb.conf << EOF
+
+[Aufnahmen]
+path = /var/www
+public = yes
+writeable = yes
+create mask = 0755
+directory mask = 0755
+guest ok = yes
+browseable = yes
+EOF
+
+/etc/init.d/samba restart
+
+# Change Apache root directory
+
+cp /etc/apache2/sites-available/000-default.conf \
+/etc/apache2/sites-available/000-default.conf.original
+
+sed 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www/g' \
+/etc/apache2/sites-available/000-default.conf > temp_file
+mv temp_file /etc/apache2/sites-available/000-default.conf
+
+/etc/init.d/apache2 restart
+
+# Configure ReadyMedia DLNA-Server
+
+cp /etc/minidlna.conf /etc/minidlna.conf.original
+
+sed 's/media_dir=\/var\/lib\/minidlna/media_dir=\/var\/www\/Aufnahmen/g' \
+/etc/minidlna.conf > temp_file
+mv temp_file /etc/minidlna.conf
+sed 's/#network_interface=/network_interface=eth0/g' \
+/etc/minidlna.conf > temp_file
+mv temp_file /etc/minidlna.conf
+sed 's/#friendly_name=/friendly_name=RadioBeere/g' \
+/etc/minidlna.conf > temp_file
+mv temp_file /etc/minidlna.conf
+sed 's/#inotify=yes/inotify=yes/g' \
+/etc/minidlna.conf > temp_file
+mv temp_file /etc/minidlna.conf
+
+/etc/init.d/minidlna restart
+
+# Add cronjobs
+
+cat >> /etc/crontab << EOF
+0 0 * * * root /home/pi/radiobeere/rb-timer-update.py > /dev/null 2>&1
+5 0 * * * root /home/pi/radiobeere/rb-rec-cleanup.py > /dev/null 2>&1
+10 0 * * * root /bin/rm /var/lib/minidlna/files.db ; /etc/init.d/minidlna restart > /dev/null $
+#
+EOF
+
+# Grant sudo rights to user www-data
+
+cat >> /etc/sudoers << EOF
+www-data ALL=NOPASSWD:/home/pi/radiobeere/rb-timer-update.py
+www-data ALL=NOPASSWD:/home/pi/radiobeere/podcast.py
+EOF
