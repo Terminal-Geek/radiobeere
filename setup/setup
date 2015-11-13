@@ -40,6 +40,7 @@ cat radiobeere.sql | mysql -u root -p
 # Move frontend files from radiobeere repository to web root
 
 mv ../var/www/* /var/www
+chmod 777 /var/www/img/podcast
 
 # Create Samba share
 
