@@ -21,7 +21,7 @@
                 <a href="/" data-icon="home" data-iconpos="notext">Startseite</a>
         </div>
 
-<!--- Seiteninhalt --->
+
 
         <div data-role="main" class="ui-content">
 	<h2>Sender verwalten</h2>
@@ -67,30 +67,70 @@
                 {
                 echo "<b><font color=\"#f00\">Sender bereits in der Datenbank!</font></b><br><br>";
 		}
-        else
-                {
-	        $eintrag = "INSERT INTO sender (alias, name, url) VALUES ('$alias', '$name', '$url')";
-        	$eintragen = mysql_query($eintrag);
-			exec("sudo /home/pi/radiobeere/podcast.py $alias");
-                echo "<b><font color=\"#f00\">Sender gespeichert!</font></b><br><br>";
-                }
+        else {
+        		if ($_FILES['cover']['tmp_name'] !="")
+						{               
+							$datei = GetImageSize($_FILES['cover'][strtolower('tmp_name')]);
+							$breite = $datei[0];
+							$laenge = $datei[1];
+							$typ = $datei[2];
+							$size = $_FILES['cover']['size'];
+							
+							if($typ == 2 AND $typ != 0)
+							   {
+							
+							   if($size <  512000)
+							      {
+							      move_uploaded_file($_FILES['cover']['tmp_name'], "img/podcast/".$alias.".jpg");
+									$eintrag = "INSERT INTO sender (alias, name, url) VALUES ('$alias', '$name', '$url')";
+									$eintragen = mysql_query($eintrag);
+									exec("sudo /home/pi/radiobeere/podcast.py $alias");
+									echo "<b><font color=\"#f00\">Sender gespeichert!</font></b><br><br>";
+							      }
+							
+							   else
+							      {
+							         echo "<b><font color=\"#f00\">Das Bild darf nicht größer als ein halbes Megabyte sein.
+							         Der Sender wurde nicht gespeichert. Bitte versuche es nochmals.<br><br></font></b>";
+							      }
+							
+							    }
+							
+							else
+							    {
+							    echo "<b><font color=\"#f00\">Bitte nur Dateien mit der Endung .jpg oder .jpeg hochladen.
+							    Der Sender wurde nicht gespeichert. Bitte versuche es nochmals.<br><br></font></b>";
+							    }  		
+						}
+			else 	{
+						$eintrag = "INSERT INTO sender (alias, name, url) VALUES ('$alias', '$name', '$url')";
+						$eintragen = mysql_query($eintrag);
+						exec("sudo /home/pi/radiobeere/podcast.py $alias");
+						echo "<b><font color=\"#f00\">Sender gespeichert!</font></b><br><br>";
+						}
+					}
+					
 	unset($row);
 	unset($name);
 	unset($url);
-	echo "<script type=\"text/javascript\">setTimeout(function(){location.reload(true);}, 3000);</script>";
+	unset($_FILES);
+	echo "<script type=\"text/javascript\">setTimeout(function(){location.reload(true);}, 6000);</script>";
 	}
 ?>
 
 
 	<h3>Sender hinzufügen</h3>
 
-        <form method="POST" id="hinzufuegen_sender">
+        <form method="POST" id="hinzufuegen_sender" enctype="multipart/form-data">
 
 	<label for="name">Name:
 	<input type="text" name="name" id="name">
 	</label>
         <label for="url">Stream-Adresse:
         <input type="text" name="url" id="url">
+        </label>
+			<label for="cover">Sender-Bild (optional):
+        <input type="file" name="cover" id="cover">
         </label>
 	<br>
         <input type="submit" value="Sender speichern" form="hinzufuegen_sender">
@@ -154,7 +194,6 @@
 
 	</div>
 
-<!--- Navigation --->
 
         <?php
         include("include/navigation.php");
