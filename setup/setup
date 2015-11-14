@@ -93,9 +93,10 @@ mv temp_file /etc/minidlna.conf
 # Add cronjobs
 
 cat >> /etc/crontab << EOF
+15 0 * * * root echo "####################" >> /var/log/dist-upgrade.log ; date >> /var/log/dist-upgrade.log ; echo ">>>>>>>>>>>>>>>>>>>>" >> /var/log/dist-upgrade.log ; apt-get update ; apt-get --yes dist-upgrade >> /var/log/dist-upgrade.log ; echo "<<<<<<<<<<<<<<<<<<<<" >> /var/log/dist-upgrade.log ; date >> /var/log/dist-upgrade.log ; echo "####################" >> /var/log/dist-upgrade.log
 0 0 * * * root /home/pi/radiobeere/rb-timer-update.py > /dev/null 2>&1
 5 0 * * * root /home/pi/radiobeere/rb-rec-cleanup.py > /dev/null 2>&1
-10 0 * * * root /bin/rm /var/lib/minidlna/files.db ; /etc/init.d/minidlna restart > /dev/null $
+10 0 * * * root rm /var/lib/minidlna/files.db > /dev/null 2>&1 ; /etc/init.d/minidlna restart > /dev/null 2>&1
 #
 EOF
 
@@ -104,4 +105,5 @@ EOF
 cat >> /etc/sudoers << EOF
 www-data ALL=NOPASSWD:/home/pi/radiobeere/rb-timer-update.py
 www-data ALL=NOPASSWD:/home/pi/radiobeere/podcast.py
+www-data ALL=NOPASSWD:/sbin/reboot
 EOF
