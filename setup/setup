@@ -37,6 +37,12 @@ chmod 644 ../var/www/include/db-connect.php
 
 cat radiobeere.sql | mysql -u root -p
 
+# Create system and Samba user radiobeere
+
+useradd --no-create-home radiobeere
+(echo "radiobeere" ; sleep 5 ; echo "radiobeere") | passwd radiobeere
+(echo "radiobeere" ; sleep 5 ; echo "radiobeere") | smbpasswd -s -a radiobeere
+
 # Move frontend files from radiobeere repository to web root
 
 mv ../var/www/* /var/www
