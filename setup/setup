@@ -2,7 +2,7 @@
 
 # Install packages via package manager
 
-apt-get install samba-common samba apache2 php5 mysql-server php5-mysql phpmyadmin \
+apt-get install samba-common samba apache2 php5 mysql-server php5-mysql \
 minidlna streamripper python-mysqldb
 
 # Download and install Mutagen
