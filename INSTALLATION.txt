@@ -1,5 +1,6 @@
 Installation of RadioBeere software
 
+
 - 1 -
 
 Install Raspian. I'm using the release officially supported by the Raspberry
@@ -10,6 +11,7 @@ http://www.raspberrypi.org
 When done with that, update your system:
 
 sudo apt-get updatesudo apt-get dist-upgrade
+
 
 - 2 -
 
@@ -33,6 +35,8 @@ Now it's time to get the RadioBeere software on your machine:
 
 mkdir /home/pi/radiobeere
 cd /home/pi/radiobeeregit clone http://github.com/Terminal-Geek/radiobeere.git
+
+
 - 4 -
 
 Call the setup script and lay back.
