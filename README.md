@@ -35,7 +35,9 @@ The origins are clearly labeled, you'll find more information
 and attributions in the according directories: 
 
 /var/www/js/pickadate.js-3.5.6
+
 /var/www/img
+
 /var/www/img/podcast
 
 
@@ -101,7 +103,9 @@ Information about stations, recordings and timers ist stored in a
 MySQL database:
 
 http://httpd.apache.org
+
 http://www.mysql.de
+
 http://www.php.net
 
 The RadioBeere makes use of the jQuery library:
