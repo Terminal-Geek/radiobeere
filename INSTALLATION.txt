@@ -10,7 +10,8 @@ http://www.raspberrypi.org
 
 When done with that, update your system:
 
-sudo apt-get updatesudo apt-get dist-upgrade
+sudo apt-get update
+sudo apt-get dist-upgrade
 
 
 - 2 -
@@ -22,10 +23,10 @@ raspi-config
 Choose the "Internationalisation Options" and the appropriate Locale and
 Timezone for your location. Under "Advanced Options" you can choose an
 individual host name. I chose "radiobeere", thus my recorder is available on
-my LAN via http://radiobeere.
+my LAN via http://radiobeere
 
 If you have the official Raspian (as of late 2015) installed, the system will boot
-to a X windows environment by default. This is not, what we want. Change
+to a X Windows environment by default. This is not, what we want. Change
 this under "Boot Options" in raspi-config.
 
 
@@ -33,15 +34,15 @@ this under "Boot Options" in raspi-config.
 
 Now it's time to get the RadioBeere software on your machine:
 
-mkdir /home/pi/radiobeere
-cd /home/pi/radiobeeregit clone http://github.com/Terminal-Geek/radiobeere.git
+cd /home/pi
+git clone http://github.com/Terminal-Geek/radiobeere.git
 
 
 - 4 -
 
 Call the setup script and lay back.
 
-cd setup
+cd /home/pi/radiobeere/setup
 sudo ./setup
 
 IMPORTANT NOTICE: You should only use the setup script on a freshly installed
@@ -51,3 +52,7 @@ have a look at the setup script. It is commented generously.
 
 When asked for a password for the MySQL root user, just choose one (a secure
 one preferably). You'll be asked for it later during the installation process.
+
+When asked for a password for a UNIX user, just wait 5 seconds and don't do anything.
+
+The installation make take some time. Just get a fresh cup of coffee.
