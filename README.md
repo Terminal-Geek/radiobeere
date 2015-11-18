@@ -113,7 +113,7 @@ exception, the versatile tagging module Mutagen:
 
 http://mutagen.readthedocs.org
 
-The calendar helping you programming your radio shows is Amsuls nice
+The calendar helping you programming your recordings is Amsuls nice
 Date Picker:
 
 http://amsul.ca/pickadate.js
