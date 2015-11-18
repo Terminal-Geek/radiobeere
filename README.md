@@ -77,7 +77,7 @@ The software is intended to make recording of PRIVATE copies of radio shows
 easy. Please be aware of copyright rules in your country. Everyone using this
 software for recording livestreams on the internet is responsible for what
 he's doing. The RadioBeere must NOT be used for recording radio streams
-intending to be make the resulting audio files accessible for the public.
+intending to make the resulting audio files accessible for the public.
 
 I assume, that you use your RadioBeere within your local network. Be warned:
 Do NOT expose your Apache-Webserver, running on your RadioBeere, to the
@@ -87,7 +87,7 @@ for details). Even though the rights are restricted, this is NOT 100% secure.
 The RadioBeere software ist designed to be running on a Raspberry Pi with
 Raspian installed (official version distributed by the Raspberry Foundation).
 The system is meant to be on 24/7. The scripts should be suitable for any
-Debian distro (or even other Linux flavours), though. If you want use the
+Debian distro (or even other Linux flavours), though. If you want to use the
 software on any other platform than a Raspberry Pi with Raspbian, you should
 have a look at the source code and perhaps change it to your needs. 
 
