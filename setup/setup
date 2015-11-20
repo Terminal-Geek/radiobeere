@@ -110,6 +110,7 @@ EOF
 
 cat >> /etc/sudoers << EOF
 www-data ALL=NOPASSWD:/home/pi/radiobeere/rb-timer-update.py
+www-data ALL=NOPASSWD:/home/pi/radiobeere/rb-rec-cleanup.py
 www-data ALL=NOPASSWD:/home/pi/radiobeere/podcast.py
 www-data ALL=NOPASSWD:/sbin/reboot
 EOF
