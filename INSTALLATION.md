@@ -11,6 +11,7 @@ http://www.raspberrypi.org
 When done with that, update your system:
 
 sudo apt-get update
+
 sudo apt-get dist-upgrade
 
 
@@ -35,6 +36,7 @@ this under "Boot Options" in raspi-config.
 Now it's time to get the RadioBeere software on your machine:
 
 cd /home/pi
+
 git clone http://github.com/Terminal-Geek/radiobeere.git
 
 
@@ -43,6 +45,7 @@ git clone http://github.com/Terminal-Geek/radiobeere.git
 Call the setup script and lay back.
 
 cd /home/pi/radiobeere/setup
+
 sudo ./setup
 
 IMPORTANT NOTICE: You should only use the setup script on a freshly installed
