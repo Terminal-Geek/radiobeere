@@ -30,7 +30,7 @@ to a X Windows environment by default. This is not, what we want. Change
 this under "Boot Options" in raspi-config.
 
 
--3 -
+- 3 -
 
 Now it's time to get the RadioBeere software on your machine:
 
