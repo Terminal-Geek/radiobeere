@@ -114,3 +114,8 @@ www-data ALL=NOPASSWD:/home/pi/radiobeere/rb-rec-cleanup.py
 www-data ALL=NOPASSWD:/home/pi/radiobeere/podcast.py
 www-data ALL=NOPASSWD:/sbin/reboot
 EOF
+
+# Link web root to RadioBeere root
+
+echo "/var/www /home/pi/radiobeere/var/www none bind 0 0" >> /etc/fstab
+mount -al
