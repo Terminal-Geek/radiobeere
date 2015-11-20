@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "####################"
+date
+echo ">>>>>>>>>>>>>>>>>>>>"
+apt-get update
+apt-get --yes dist-upgrade
+echo "<<<<<<<<<<<<<<<<<<<<"
+date
+echo "####################"

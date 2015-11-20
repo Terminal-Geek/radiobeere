@@ -147,9 +147,11 @@
                 dist-upgrade</code> durchgeführt. Was dabei installiert wird
                 oder ob Fehler aufgetaucht sind, steht in folgendem Log-File:
                 <br /><br />
-                <a href="dist-upgrade.log" target="_blank">/var/log/dist-upgrade.log</a></p>
+                <a href="dist-upgrade.log" target="_blank">/var/www/dist-upgrade.log</a></p>
                 <p>Die RadioBeere-Software selbst wird dabei nicht
-                aktualisiert. Dieses Feature rüste ich später nach.</p>
+                aktualisiert. Dies kannst du auf der Seite
+                <a href="maintenance.php">Wartung</a>
+                von Hand mit einem Klick erledigen.</p>
             </div>
 
             <div data-role="collapsible">

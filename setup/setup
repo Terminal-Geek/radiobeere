@@ -43,10 +43,22 @@ useradd --no-create-home radiobeere
 (echo "radiobeere" ; sleep 5 ; echo "radiobeere") | passwd radiobeere
 (echo "radiobeere" ; sleep 5 ; echo "radiobeere") | smbpasswd -s -a radiobeere
 
-# Move frontend files from radiobeere repository to web root
+# Move frontend files to web root
 
 mv ../var/www/* /var/www
 chmod 777 /var/www/img/podcast
+
+# Link web root to RadioBeere directory
+
+echo "/var/www /home/pi/radiobeere/var/www none bind 0 0" >> /etc/fstab
+mount -al
+
+# Declare changed files as unchanged to git
+
+cd /home/pi/radiobeere
+git update-index --assume-unchanged login.py
+git update-index --assume-unchanged setup/radiobeere.sql
+update-index --assume-unchanged var/www/include/db-connect.php
 
 # Create Samba share
 
@@ -99,7 +111,7 @@ mv temp_file /etc/minidlna.conf
 # Add cronjobs
 
 cat >> /etc/crontab << EOF
-15 0 * * * root echo "####################" >> /var/log/dist-upgrade.log ; date >> /var/log/dist-upgrade.log ; echo ">>>>>>>>>>>>>>>>>>>>" >> /var/log/dist-upgrade.log ; apt-get update ; apt-get --yes dist-upgrade >> /var/log/dist-upgrade.log ; echo "<<<<<<<<<<<<<<<<<<<<" >> /var/log/dist-upgrade.log ; date >> /var/log/dist-upgrade.log ; echo "####################" >> /var/log/dist-upgrade.log ; cp /var/log/dist-upgrade.log /var/www/dist-upgrade.log
+15 0 * * * root /home/pi/radiobeere/setup/update-system >> /var/www/dist-upgrade.log 2>&1 ; /home/pi/radiobeere/setup/shorten-log
 0 0 * * * root /home/pi/radiobeere/rb-timer-update.py > /dev/null 2>&1
 5 0 * * * root /home/pi/radiobeere/rb-rec-cleanup.py > /dev/null 2>&1
 10 0 * * * root rm /var/lib/minidlna/files.db > /dev/null 2>&1 ; /etc/init.d/minidlna restart > /dev/null 2>&1
@@ -112,10 +124,6 @@ cat >> /etc/sudoers << EOF
 www-data ALL=NOPASSWD:/home/pi/radiobeere/rb-timer-update.py
 www-data ALL=NOPASSWD:/home/pi/radiobeere/rb-rec-cleanup.py
 www-data ALL=NOPASSWD:/home/pi/radiobeere/podcast.py
+www-data ALL=NOPASSWD:/home/pi/radiobeere/setup/update-radiobeere
 www-data ALL=NOPASSWD:/sbin/reboot
 EOF
-
-# Link web root to RadioBeere root
-
-echo "/var/www /home/pi/radiobeere/var/www none bind 0 0" >> /etc/fstab
-mount -al

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+tail -n 1000 /var/www/dist-upgrade.log > /var/www/dist-upgrade.log.tmp
+mv /var/www/dist-upgrade.log.tmp /var/www/dist-upgrade.log
