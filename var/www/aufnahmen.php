@@ -73,14 +73,7 @@
                 foreach ($_POST['del'] as $eintrag) {
                 
                 $loeschen = "DELETE FROM aufnahmen WHERE id = $eintrag";
-	        
-	        		$abfrage = "SELECT datei FROM aufnahmen WHERE id = $eintrag";
-	        		$ergebnis = mysql_query($abfrage);
-	        		while($row = mysql_fetch_object($ergebnis))
-   					{
-   						$datei = "/var/www/Aufnahmen/$row->datei";
-					}
-                
+	       
                 $abfrage = "SELECT sender FROM aufnahmen WHERE id = $eintrag";
                 $ergebnis = mysql_query($abfrage);
                 while($row = mysql_fetch_object($ergebnis))
@@ -92,8 +85,7 @@
 
                 	$loesch = mysql_query($loeschen);
 	               	exec("sudo /home/pi/radiobeere/podcast.py $alias");
-						exec("rm $datei");
-
+			exec("sudo /home/pi/radiobeere/rb-rec-cleanup.py");
 
                 	}
 					unset($del);
