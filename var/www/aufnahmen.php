@@ -92,6 +92,7 @@
 
                 	$loesch = mysql_query($loeschen);
 	               	exec("sudo /home/pi/radiobeere/podcast.py $alias");
+echo $datei;
 						exec("rm $datei");
 
 
