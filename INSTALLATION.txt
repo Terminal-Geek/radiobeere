@@ -55,4 +55,4 @@ one preferably). You'll be asked for it later during the installation process.
 
 When asked for a password for a UNIX user, just wait 5 seconds and don't do anything.
 
-The installation make take some time. Just get a fresh cup of coffee.
+The installation may take some time. Just get a fresh cup of coffee.
