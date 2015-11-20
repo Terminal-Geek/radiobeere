@@ -29,8 +29,8 @@
 	<a href="streaming.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button streaming"></div>Streaming</div></a>	
 	<a href="stations.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button stations"></div>Sender</div></a>
 	<a href="help.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button help"></div>Hilfe</div></a>
+	<a href="maintenance.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button maintenance"></div>Wartung</div></a>
 	<a href="reboot.php"><div class="hp-wrapper ui-btn ui-input-btn ui-shadow ui-btn-inline"><div class="hp-button reboot"></div>Neustart</div></a>
-
 	</div>
 
         <?php

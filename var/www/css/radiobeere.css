@@ -57,6 +57,10 @@ h2 	{
 	background-image: url(/img/reboot.svg);
 }
 
+.maintenance {
+	background-image: url(/img/maintenance.svg);
+}
+
 .illu-content-wrapper {
 	min-width: 150px;
 	max-width: 350px;
@@ -93,4 +97,7 @@ h2 	{
 }
 .illu-reboot{
 	background-image: url(/img/reboot.svg);
+}
+.illu-maintenance{
+	background-image: url(/img/maintenance.svg);
 }

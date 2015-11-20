@@ -18,6 +18,7 @@ include("include/styling.php");
 <div data-role="header">
 <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Men&uuml;</a>
 <h1>RadioBeere</h1>
+<a href="/" data-icon="home" data-iconpos="notext">Startseite</a>
 </div>
 
 <div data-role="main" class="ui-content">
@@ -81,6 +82,11 @@ echo $free." Gigabyte";
 <p>Die Länge der Log-Datei ist auf 1.000 Zeichen begrenzt.</p>
 
 <a href="dist-upgrade.log" target="_blank" class="ui-btn">Log-Datei ansehen</a>
+
+<div class="illu-content-wrapper">
+<div class="illu-content illu-maintenance">
+</div>
+</div>
 
 </div>
 

@@ -8,6 +8,7 @@
         <li><a href="streaming.php">Streaming Server</a></li>
         <li><a href="stations.php">Sender verwalten</a></li> 
         <li><a href="help.php">Hilfe</a></li>
+        <li><a href="maintenance.php">Wartung</a></li>
         <li><a href="reboot.php">System neu starten</a></li>
     </ul>
 </div>
