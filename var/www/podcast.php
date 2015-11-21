@@ -41,10 +41,10 @@
 	  	$ergebnis = mysql_query($abfrage);
 	 	while($row = mysql_fetch_object($ergebnis))
 		 {
-		 	$feed = "http://$hostname/podcast/$row->alias.xml";
-		 echo "<b>$row->name:</b><br><a href=\"$feed\" target=\"_blank\">$feed</a><br><br>";
+		 	$feed = "$hostname/podcast/$row->alias.xml";
+		 echo "<b>$row->name:</b><br><a href=\"pcast://$feed\" target=\"_blank\">http://$feed</a><br><br>";
 		}
-?>	  
+?>
 	</p>
 
 
