@@ -58,7 +58,7 @@ mount -al
 cd /home/pi/radiobeere
 git update-index --assume-unchanged login.py
 git update-index --assume-unchanged setup/radiobeere.sql
-update-index --assume-unchanged var/www/include/db-connect.php
+git update-index --assume-unchanged var/www/include/db-connect.php
 
 # Create Samba share
 
