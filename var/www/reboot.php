@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>RadioBeere - Neustart</title>
     <meta name="viewport"
-          content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
+          content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
     <?php
     include("include/styling.php");
     ?>
@@ -16,7 +16,6 @@
          class="ui-responsive-panel"
          id="panel"
          data-title="RadioBeere">
-
         <div data-role="header">
             <a href="#nav-panel"
                  data-icon="bars"
@@ -35,8 +34,8 @@
             if($_POST['reboot'] == "true")
                 {
                 echo "<p>Das System wird nun heruntergefahren und neu gestartet.
-                    In etwa zwei Minuten kannst du die <a href=\"/\">Startseite</a>
-                    der RadioBeere wieder aufrufen.</p>";
+                In etwa zwei Minuten kannst du die <a href=\"/\">Startseite</a>
+                der RadioBeere wieder aufrufen.</p>";
                 exec("sudo reboot");
                 }
             else
@@ -45,7 +44,7 @@
                 echo "<br />";
                 echo "<form method=\"post\">";
                 echo "<button type=\"submit\" name=\"reboot\" value=\"true\">
-                    Neustart</button>";
+                Neustart</button>";
                 echo "</form>";
                 }
             ?>
