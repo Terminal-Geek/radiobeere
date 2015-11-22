@@ -25,7 +25,7 @@
                  data-icon="home"
                  data-iconpos="notext">Startseite</a>
         </div>
-        
+
         <?php
         $filter_sender = $_POST["filter_sender"];
         if(!isset($filter_sender))
@@ -41,7 +41,7 @@
             <?php
             include("include/db-connect.php")
             ?>
-            
+
             <!-- Filter stations -->
 
             <div class="ui-field-contain">
@@ -54,7 +54,7 @@
                         <option value="alle">
                             Alle Sender
                         </option>
-                        
+
                         <?php
                         $abfrage = "SELECT name FROM sender ORDER BY name";
                         $ergebnis = mysql_query($abfrage);
@@ -71,11 +71,11 @@
                                 }
                             }
                         ?>
-                        
+
                     </select>
                 </form>
             </div>
-            
+
             <!-- Delete database-entries and files, renew podcast-feed -->
 
             <?php
@@ -83,7 +83,7 @@
                 {
                 foreach ($_POST['del'] as $eintrag)
                     {
-                    $loeschen = "DELETE FROM aufnahmen WHERE id = $eintrag";                   
+                    $loeschen = "DELETE FROM aufnahmen WHERE id = $eintrag";
                     $abfrage = "SELECT sender FROM aufnahmen WHERE id = $eintrag";
                     $ergebnis = mysql_query($abfrage);
                     while($row = mysql_fetch_object($ergebnis))
@@ -94,7 +94,7 @@
                     $alias = preg_replace("/[^0-9a-zA-Z \-\_]/", "", $alias);
                     $loesch = mysql_query($loeschen);
                     exec("sudo /home/pi/radiobeere/podcast.py $alias");
-                    exec("sudo /home/pi/radiobeere/rb-rec-cleanup.py");    
+                    exec("sudo /home/pi/radiobeere/rb-rec-cleanup.py");
                     }
                 unset($del);
                 echo "<script type=\"text/javascript\">window.location.reload(true);</script>";
@@ -122,7 +122,7 @@
             $menge = mysql_num_rows($abfrage);
             $wieviel_seiten = $menge / $eintraege_pro_seite;
             ?>
-            
+
             <!-- List recordings -->
 
             <form method="post"
