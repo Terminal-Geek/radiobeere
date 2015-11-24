@@ -71,7 +71,7 @@
                         $ergebnis = mysql_query($abfrage);
                         while($row = mysql_fetch_object($ergebnis))
                             {
-                            echo "<option value=\"$row->alias\">$row->name</option><br>";
+                            echo "<option value=\"$row->alias\">$row->name</option>";
                             }
                         ?>
 
