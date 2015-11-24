@@ -36,7 +36,7 @@
             ?>
 
 <!-- Delete stations and related timers -->
-            
+
             <?php
             if ($_POST['del'])
                 {
@@ -85,7 +85,7 @@
                         $laenge = $datei[1];
                         $typ = $datei[2];
                         $size = $_FILES['cover']['size'];
-            
+
                         if($typ == 2 AND $typ != 0)
                             {
                             if($size <  512000)
@@ -106,9 +106,9 @@
                             {
                             echo "<b><font color=\"#f00\">Bitte nur Dateien mit der Endung .jpg oder .jpeg hochladen.
                             Der Sender wurde nicht gespeichert. Bitte versuche es nochmals.<br><br></font></b>";
-                            }               
+                            }
                         }
-    
+
                     else
                         {
                         $eintrag = "INSERT INTO sender (alias, name, url) VALUES ('$alias', '$name', '$url')";
@@ -117,7 +117,7 @@
                         echo "<b><font color=\"#f00\">Sender gespeichert!</font></b><br><br>";
                         }
                     }
-    
+
                 unset($row);
                 unset($name);
                 unset($url);
@@ -181,7 +181,7 @@
                     echo "<br/>";
                     }
                 ?>
-                
+
                 <a href="#popupDialog"
                       data-rel="popup"
                       data-position-to="window"
