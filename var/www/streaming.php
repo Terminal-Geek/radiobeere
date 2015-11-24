@@ -53,8 +53,7 @@
             folgender Seite:</p>
 
             <p><a href="http://www.dlna.org"
-               target="_blank">http://www.dlna.org</a>
-            </p>
+               target="_blank">http://www.dlna.org</a></p>
 
             <div class="illu-content-wrapper">
                 <div class="illu-content illu-streaming">
